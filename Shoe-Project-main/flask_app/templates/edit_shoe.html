@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Edit</title>
+</head>
+<body>
+    <div class="p-4 bg-dark text-center border" style="background-image: url('{{url_for('static',filename='image/safaridunk.jpg') }}')">
+        <div class="container w-25 bg-dark text-success border mb-2">
+            <h1>Show Ur Sole</h1>
+        </div>
+        <p class="p-2 container w-25 bg-dark text-warning border">A Space to Show Your Sole</p> 
+    </div>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid justify-content-lg-center">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"  href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <h2>Edit Shoe</h2>
+        <div class="row">
+            <form action="/update/shoe/{{shoe.id}}" method="post" class="col-5 bg-warning">
+                {% with messages = get_flashed_messages(category_filter=['shoe']) %}
+                    {% if messages %}
+                    <div class="alert alert-danger" role="alert">
+                            {% for message in messages %}
+                            <p>{{message}}</p>
+                            {% endfor %}
+                    </div>
+                    {% endif %}
+                {% endwith %}
+                <div class="form-group">
+                    <label for="name" class="form-label">Name:</label>
+                    <input type="text" name="name" value="{{shoe.name}}"  class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="Brand" class="form-label">Brand:</label>
+                    <input type="text" name="brand" value="{{shoe.brand}}"  class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="model" class="form-label">Model:</label>
+                    <input type="text" name="model" value="{{shoe.model}}"  class="form-control">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="size" class="form-label">Size:</label>
+                    <select name="size" id="size" value="{{shoe.size}}">
+                        <option >{{shoe.size}}</option>
+                        <script>
+                            for(var i=5;i<=16;i=i+0.5)
+                            {
+                                document.write('<option>'+i+"</option>");
+                            }
+                        </script>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="price" class="form-label">Price:</label>
+                    <input type="text" name="price" value="{{shoe.price}}"   class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="description" class="form-label">Description:</label>
+                    <textarea name="description" id="" cols="60" rows="10"  class="form-control">{{shoe.description}}</textarea>
+                </div>
+                <input type="Submit" value="Edit" class="btn btn-dark col-sm-4 btn-sm my-2">                      
+            </form>
+        </div>
+    </div>
+    <script src="project/Shoe-Project/flask_app/templates/script.js"></script>
+</body>
+</html>

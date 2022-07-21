@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Login</title>
+</head>
+<body>
+    <div class="p-4 bg-dark text-center border" style="background-image: url('{{url_for('static',filename='image/questions.jpg') }}')">
+        <div class="container w-25 bg-dark text-info border mb-2">
+            <h1>Show Ur Sole</h1>
+        </div>
+        <p class="p-2 container w-25 bg-dark text-danger border">A Space to Show Your Sole</p> 
+    </div>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid justify-content-lg-center">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard">Dashboard</a>  
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"  href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="conatiner-fluid row mt-5">
+        <div class="col bg-info m-2 p-2">
+                <form action="/new_user" method="post" class="col-6 mx-auto">
+                    <h2 class="text-center">Register</h2>
+                    {% with messages = get_flashed_messages(category_filter=['register']) %}
+                        {% if messages %}
+                        <div class="alert alert-danger" role="alert">
+                                {% for message in messages %}
+                                <p>{{message}}</p>
+                                {% endfor %}
+                        </div>
+                        {% endif %}
+                    {% endwith %}
+                    <div class="form-group">
+                        <label for="first_name" class="form-label">First Name:</label>
+                        <input type="text" name="first_name"  class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="last_name" class="form-label">Last Name:</label>
+                        <input type="text" name="last_name"  class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="text" name="email"  class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="nick_name" class="form-label">Nick Name:</label>
+                        <input type="text" name="nick_name"  class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="form-label">Password:</label>
+                        <input type="password" name="password"  class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm_password" class="form-label">Confirm Password:</label>
+                        <input type="password" name="confirm_password"  class="form-control">
+                    </div>
+                    <input type="Submit" value="Register" class="btn btn-dark col-sm-3 btn-sm my-2">                      
+                </form>
+        </div>
+        <div class="col bg-danger m-2 p-2">
+            <form action="/login" method="post" class="col-6 mx-auto">
+                <h2 class="text-center">Login</h2>
+                {% with messages = get_flashed_messages(category_filter=['login']) %}
+                    {% if messages %}
+                    <div class="alert alert-danger" role="alert">
+                            {% for message in messages %}
+                            <p>{{message}}</p>
+                            {% endfor %}
+                    </div>
+                    {% endif %}
+                {% endwith %}
+                <div class="form-group">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="text" name="email"  class="form-control">
+                </div>        
+                <div class="form-group">
+                    <label for="password" class="form-label">Password:</label>
+                    <input type="password" name="password"  class="form-control">
+                </div>
+                <input type="Submit" value="Login" class="btn btn-dark col-sm-2 btn-sm my-2">  
+            </form>
+        </div>
+    </div>
+</body>
+</html>

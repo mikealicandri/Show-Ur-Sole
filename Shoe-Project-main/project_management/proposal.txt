@@ -1,0 +1,14 @@
+Description: A network for people who share the same compassion for fashion!
+
+Names: August Sarrazin, Alexis Valengon, Mike Alicandri, Ying Rong
+
+Bonus features: file upload, publicly deployed, API integration
+
+August - Back-end
+Mike - Front-end
+Alexis - Combination + API integration
+Ying - SQL database creation
+
+
+https://github.com/AugustSarrazin/Shoe-Project
+

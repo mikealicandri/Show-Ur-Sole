@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Dash</title>
+</head>
+<body>
+    <div class="p-4 bg-dark text-center border" style="background-image: url('{{url_for('static',filename='image/blazers.jpeg') }}')">
+        <div class="container w-25 bg-dark text-light border mb-2">
+            <h1>Show Ur Sole</h1>
+        </div>
+        <p class="p-2 container w-25 bg-dark text-warning border">A Space to Show Your Sole</p> 
+    </div>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid justify-content-lg-center">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/new/shoe">Add New Shoe</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"  href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container pt-5">
+        <h1 class="text-center"> Welcome {{user.nick_name.capitalize()}}</h1>
+        <h1 class="text-center"> </h1>
+        <div class="container pt-5">
+            <h2>Our Shoes</h2>
+            <hr>
+        </div>
+    </div>
+    <div class="container">
+        <table class="table table-dark table-hover table-bordered table-striped"> 
+            <tbody>
+                {% for shoe in shoes %}                    
+                <tr>
+                    <td>
+                        <ul class="list-group">
+                            <li class="list-group-item-active">Likes  </li>
+                            <li class="list-group-item-active">{{shoe.likes}}</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul style="list-style-type: none;" class="list-group">
+                            <li class="list-group-item-active">Name of shoe: {{ shoe.name }}</li>
+                            <li class="list-group-item-active">Brand: {{ shoe.brand }}</li>
+                            <li class="list-group-item-active"> Price: {{ shoe.price }}</li>
+                            <li class="list-group-item-active">Created by {{ shoe.nick_name }}</li>
+                        </ul>
+                    </td>
+                        <td>
+                            <div style="list-style-type: none;" class="btn-group-vertical">
+                                <a class="btn btn-secondary" href="/shoe/{{ shoe.id }}">View</a>
+                                {% if shoe.user_id == session.user_id %} 
+                                <a class="btn btn-secondary" href="/edit/shoe/{{ shoe.id }}">Edit</a> 
+                                <a class="btn btn-secondary" href="/delete/shoe/{{ shoe.id }}">Delete</a>
+                                {% endif %}
+                            </div>
+                        </td>
+                </tr>                    
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

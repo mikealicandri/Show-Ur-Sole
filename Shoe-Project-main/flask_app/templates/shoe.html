@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>View</title>
+</head>
+<body>
+    <div class="p-4 bg-dark text-center border" style="background-image: url('{{url_for('static',filename='image/newbalance998.jpeg') }}')">
+        <div class="container w-25 bg-dark text-danger border mb-2">
+            <h1>Show Ur Sole</h1>
+        </div>
+        <p class="p-2 container w-25 bg-dark text-success border">A Space to Show Your Sole</p> 
+    </div>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid justify-content-lg-center">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard">Dashboard</a>  
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"  href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col">
+                <div class="container">
+                    <h3>{{shoe.name}}</h3>
+                    <img src="" alt="" style="display:inline-block">
+                    <div style="display:inline-block">
+                        <img src="{{shoe.photo}}" alt="Oops">
+                        <p>Name: {{shoe.name}}</p>
+                        <p>Brand:  {{shoe.brand}} </p>
+                        <p>Model:  {{shoe.model}} </p>
+                        <p>Size: {{shoe.size}}</p>
+                        <p>Price: {{shoe.price}}</p>
+                        <p>Descrption: {{shoe.description}}</p>
+                        <p>Likes received: {{shoe.likes}}</p>
+                    </div>
+                    <form action="/like/{{shoe.id}}" method="post" >
+                        <input type="hidden" name ="shoe.id" value="{{shoe.id}}">  
+                        <input class="btn btn-dark col-sm-2 btn-sm mt-2" type="submit" value="I want it">
+                    </form>
+                </div>
+            </div>
+            <div class="container col">
+                <table class="table table-dark table-hover table-bordered table-striped"> 
+                    <thead>
+                        <td>Nick name</td>
+                        <td>Comment</td>
+                    </thead>
+                    <tbody>
+                        {% for comment in comments %}
+                        <tr>
+                            <td>{{comment.nick_name}}</td>
+                            <td>{{comment.comment}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="mt-4">
+                    <form action="/comment" method="post">
+                        <input type="hidden" name ="shoe.id" value="{{shoe.id}}">    
+                        <input type="text" name="comment"  class="form-control">
+                        <input class="btn btn-dark col-sm-3 mt-2" type="Submit" value="Post Comment"> 
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
